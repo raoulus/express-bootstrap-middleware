@@ -1,8 +1,7 @@
-# express-bootstrap-middleware
+# express-bootstrapper
 
 ## Prerequisites
-- Create folder `middleware` in app-root
-- (optional) To load the middleware in order you have to provide a JSON configuration named `middleware.json` in app-root
+- Create a JSON configuration named `bootstrap.json` in the root folder of your app
 
 ## Usage
 ```
@@ -10,12 +9,8 @@
 
 let express = require('express');
 let app = express();
-let bootstrap = require('express-bootstrap-middleware');
-const PORT = 3000;
+let bootstrap = require('express-bootstrapper');
 
-bootstrap(app, function() {
-  app.listen(PORT, function() {
-    console.log(`App is listening on http://localhost:${PORT}`);
-  });
-});
+bootstrap(app, {bootstrap: 'bootstrap'}, () => {});
+
 ```
