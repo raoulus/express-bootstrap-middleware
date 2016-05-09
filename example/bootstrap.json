@@ -1,0 +1,11 @@
+{
+  "bootstrap": [
+    {
+      "middleware": [
+        "routes",
+        "bodyparser"
+      ]
+    },
+    "server"
+  ]
+}
