@@ -1,0 +1,29 @@
+{
+  "name": "express-bootstrap-middleware",
+  "version": "1.0.0",
+  "description": "bootstrapping middlewares in a specificed order",
+  "main": "index.js",
+  "scripts": {
+    "test": "gulp test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/raoulus/express-bootstrap-middleware.git"
+  },
+  "keywords": [
+    "express",
+    "middleware",
+    "bootstrap"
+  ],
+  "author": "Raoul Jaeckel",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/raoulus/express-bootstrap-middleware/issues"
+  },
+  "homepage": "https://github.com/raoulus/express-bootstrap-middleware#readme",
+  "dependencies": {
+    "body-parser": "^1.15.1",
+    "express": "4.13.4",
+    "glob": "7.0.3"
+  }
+}
