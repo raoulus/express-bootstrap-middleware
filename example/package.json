@@ -1,11 +1,9 @@
 {
-  "name": "express-bootstrap-middleware",
+  "name": "express-bootstrap-middleware-test",
   "version": "1.0.0",
   "description": "bootstrapping middlewares in a specificed order",
-  "main": "lib/bootstrap.js",
-  "scripts": {
-    "test": "gulp test"
-  },
+  "main": "index.js",
+  "scripts": {},
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/raoulus/express-bootstrap-middleware.git"
