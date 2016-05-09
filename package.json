@@ -25,5 +25,10 @@
     "body-parser": "^1.15.1",
     "express": "4.13.4",
     "glob": "7.0.3"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^2.4.5",
+    "sinon-chai": "^2.8.0"
   }
 }
