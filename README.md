@@ -8,7 +8,7 @@
 This modules lets you easily require a set of files (e.g. middlewares, libraries...) and will help you to keep your `app.js` clean. You only have to maintain a JSON configuration and the bootstrapper takes care that the items are loaded in the specified order. Inspired by [Loopback boot](https://docs.strongloop.com/display/public/LB/Defining+boot+scripts)
 
 ## Installation
-tbd
+`npm i express-bootstrapper`
 
 ## Usage
 `app.js`
@@ -40,7 +40,10 @@ bootstrap(app, bootstrapOpts, () => {
   ]
 }
 ```
-With this configuration the bootstrapper will first load the files `middleware/routes.js`, `middleware/bodyparser.js` and then `bootstrap/file_in_bootstrap_folder.js` and `bootstrap/another_file_in_bootstrap_folder.js`. 
+With this configuration the bootstrapper will first load the files `middleware/routes.js`, `middleware/bodyparser.js` and then `bootstrap/file_in_bootstrap_folder.js` and `bootstrap/another_file_in_bootstrap_folder.js`.
+
+_Debugging_:
+This module uses the `express-bootstrapper` namespace for debugging. To enable debug mode do the following `DEBUG=express-bootstrapper node app.js`.
 
 ## Options
 |Name |Description|

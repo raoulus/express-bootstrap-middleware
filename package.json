@@ -21,9 +21,11 @@
     "url": "https://github.com/raoulus/express-bootstrapper/issues"
   },
   "homepage": "https://github.com/raoulus/express-bootstrapper#readme",
-  "dependencies": {},
+  "dependencies": {
+  },
   "devDependencies": {
     "chai": "3.5.0",
+    "debug": "2.2.0",
     "express": "4.13.4",
     "gulp": "3.9.1",
     "gulp-jscs": "3.0.2",

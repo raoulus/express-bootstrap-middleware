@@ -2,7 +2,8 @@
 
 const fs = require('fs');
 const path = require('path');
-let debugMode = false;
+let debug = require('debug')('express-bootstrapper');
+
 /**
  * Bootstraps a list of files (provided by a configuration)
  *
@@ -14,7 +15,6 @@ let debugMode = false;
  */
 module.exports = function(app, opts, cb) {
   opts = opts || {};
-  debugMode = opts.debug || false;
   const rootDir = process.env.APP_ROOT || path.resolve();
   const bootstrapRoot = path.join(rootDir, opts.directory || 'bootstrap');
   let bootstrapItems = getJSONConfig(opts) || fs.readdirSync(bootstrapRoot);
@@ -22,11 +22,11 @@ module.exports = function(app, opts, cb) {
     if (typeof bootstrapItem === 'object') {
       let name = Object.keys(bootstrapItem)[0];
       bootstrapItem[name].forEach((subItem) => {
-        print(`Loading ${name}/${subItem}`);
+        debug(`Loading ${name}/${subItem}`);
         require(path.resolve(rootDir, name, subItem))(app);
       });
     } else {
-      print(`Loading ${bootstrapItem}`);
+      debug(`Loading ${bootstrapItem}`);
       require(path.resolve(bootstrapRoot, bootstrapItem))(app);
     }
   });
@@ -38,18 +38,12 @@ module.exports = function(app, opts, cb) {
 
 function getJSONConfig(opts) {
   let config = null;
-  let filename = path.resolve(`./${opts.configFileName}` || './bootstrap.json');
+  let configFileName = opts.configFileName || 'bootstrap.json';
   try {
-    config = require(filename).bootstrap;
-    print(`Bootstrapping ${filename}`);
+    config = require(path.resolve(`./${configFileName}`)).bootstrap;
+    debug(`Bootstrapping ${configFileName}`);
   } catch (e) {
-    print(`No bootstrap configuration found. Loading middlewares automatically from default folder`);
+    debug(`No bootstrap configuration found. Loading middlewares automatically from default folder`);
   }
   return config;
-}
-
-function print(message) {
-  if (debugMode && message) {
-    console.log(message);
-  }
 }
