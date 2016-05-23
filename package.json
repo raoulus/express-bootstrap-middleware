@@ -1,0 +1,36 @@
+{
+  "name": "express-bootstrapper",
+  "version": "1.0.0",
+  "description": "bootstrapping express application in a specificed order",
+  "main": "express-bootstrapper.js",
+  "scripts": {
+    "test": "cd example && mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/raoulus/express-bootstrapper.git"
+  },
+  "keywords": [
+    "express",
+    "middleware",
+    "bootstrap"
+  ],
+  "author": "Raoul Jaeckel",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/raoulus/express-bootstrapper/issues"
+  },
+  "homepage": "https://github.com/raoulus/express-bootstrapper#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "chai": "3.5.0",
+    "express": "4.13.4",
+    "gulp": "3.9.1",
+    "gulp-jscs": "3.0.2",
+    "gulp-jshint": "2.0.1",
+    "gulp-sequence": "0.4.5",
+    "jshint": "2.9.2",
+    "mocha": "2.4.5",
+    "sinon-chai": "2.8.0"
+  }
+}
