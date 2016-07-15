@@ -14,7 +14,10 @@ let debug = require('debug')('express-bootstrapper');
  * @param  {Function} cb   callback
  */
 module.exports = function(app, opts, cb) {
-  opts = opts || {};
+  if (typeof opts === 'function') {
+    cb = opts;
+    opts = {};
+  }
   const rootDir = process.env.APP_ROOT || path.resolve();
   const bootstrapRoot = path.join(rootDir, opts.directory || 'bootstrap');
   let bootstrapItems = getJSONConfig(opts) || fs.readdirSync(bootstrapRoot);

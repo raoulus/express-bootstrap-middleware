@@ -93,10 +93,23 @@ describe('bootstrapper', function() {
 
   });
 
+  describe('options are optional', function() {
+    it('callback as second parameter gets called', function() {
+      let bootstrap = require('../express-bootstrapper');
+      bootstrap(app, () => {
+        server = app.listen(3001, () => {
+          expect('this assertion to be called').to.equal('this assertion to be called');
+          done();
+        });
+      });
+    });
+
+  });
+
 });
 
 function startServer(options, done) {
-  let bootstrap = require('../../express-bootstrapper');
+  let bootstrap = require('../express-bootstrapper');
   bootstrap(app, options, () => {
     server = app.listen(3001, () => {
       done();

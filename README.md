@@ -45,6 +45,11 @@ With this configuration the bootstrapper will first load the files `middleware/r
 _Debugging_:
 This module uses the `express-bootstrapper` namespace for debugging. To enable debug mode do the following `DEBUG=express-bootstrapper node app.js`.
 
+## Parameter
+- **app**: express application (required)
+- **options**: object (optional)
+- **callback**: object (optional)
+
 ## Options
 |Name |Description|
 |-----|-----|
