@@ -18,9 +18,8 @@ This modules lets you easily require a set of files (e.g. middlewares, libraries
 let express = require('express');
 let app = express();
 let bootstrap = require('express-bootstrapper');
-let bootstrapOpts = {};
 
-bootstrap(app, bootstrapOpts, () => {
+bootstrap(app, () => {
   app.listen(3000, () => {});
 });
 ```
@@ -28,30 +27,18 @@ bootstrap(app, bootstrapOpts, () => {
 `bootstrap.json`
 ```json
 {
-  "bootstrap": [
-    {
-      "middleware": [
-        "routes",
-        "bodyparser"
-      ]
-    },
-    "file_in_bootstrap_folder",
-    "another_file_in_bootstrap_folder"
+  "middleware": [
+    "session",
+    "authentication",
+    "whatever"
   ]
 }
 ```
-With this configuration the bootstrapper will first load the files `middleware/routes.js`, `middleware/bodyparser.js` and then `bootstrap/file_in_bootstrap_folder.js` and `bootstrap/another_file_in_bootstrap_folder.js`.
+The configuration contains one item with an array of filenames which are loaded (required) in the specified order. In the given example it loads `middleware/session.js`, `middleware/authentication.js` and then `middleware/whatever.js`
 
 _Debugging_:
 This module uses the `express-bootstrapper` namespace for debugging. To enable debug mode do the following `DEBUG=express-bootstrapper node app.js`.
 
 ## Parameter
 - **app**: express application (required)
-- **options**: object (optional)
 - **callback**: object (optional)
-
-## Options
-|Name |Description|
-|-----|-----|
-|directory|Bootstrap directory. Files will be loaded in the order specified in the configuration. Default `bootstrap`.|
-|configFileName|Bootstrap configuration filename. Default `bootstrap.json`.|

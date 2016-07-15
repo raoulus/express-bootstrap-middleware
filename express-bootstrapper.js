@@ -8,30 +8,15 @@ let debug = require('debug')('express-bootstrapper');
  * Bootstraps a list of files (provided by a configuration)
  *
  * @param  {object}   app  the express application
- * @param  {object}   opts possible options are
- *                         - directory = root dir from which files will be loaded
- *                         - configFileName = name of the configuration file
  * @param  {Function} cb   callback
  */
-module.exports = function(app, opts, cb) {
-  if (typeof opts === 'function') {
-    cb = opts;
-    opts = {};
-  }
+module.exports = function(app, cb) {
   const rootDir = process.env.APP_ROOT || path.resolve();
-  const bootstrapRoot = path.join(rootDir, opts.directory || 'bootstrap');
-  let bootstrapItems = getJSONConfig(opts) || fs.readdirSync(bootstrapRoot);
-  bootstrapItems.forEach(function(bootstrapItem) {
-    if (typeof bootstrapItem === 'object') {
-      let name = Object.keys(bootstrapItem)[0];
-      bootstrapItem[name].forEach((subItem) => {
-        debug(`Loading ${name}/${subItem}`);
-        require(path.resolve(rootDir, name, subItem))(app);
-      });
-    } else {
-      debug(`Loading ${bootstrapItem}`);
-      require(path.resolve(bootstrapRoot, bootstrapItem))(app);
-    }
+  let config = getJSONConfig();
+  let bootDirectory = Object.keys(config)[0];
+  config[bootDirectory].forEach((middleware) => {
+    debug(`Loading ${bootDirectory}/${middleware}`);
+    require(path.resolve(rootDir, bootDirectory, middleware))(app);
   });
 
   if (cb) {
@@ -39,14 +24,12 @@ module.exports = function(app, opts, cb) {
   }
 };
 
-function getJSONConfig(opts) {
-  let config = null;
-  let configFileName = opts.configFileName || 'bootstrap.json';
+function getJSONConfig() {
+  let configFileName = 'bootstrap.json';
   try {
-    config = require(path.resolve(`./${configFileName}`)).bootstrap;
     debug(`Bootstrapping ${configFileName}`);
+    return require(path.resolve(`./${configFileName}`));
   } catch (e) {
-    debug(`No bootstrap configuration found. Loading middlewares automatically from default folder`);
+    throw new Error(`No bootstrap configuration found. You have to provide a ${configFileName} in your app root.`);
   }
-  return config;
 }
